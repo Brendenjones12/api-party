@@ -1,48 +1,51 @@
-import React, {Component} from 'react'
-import "./GitHub.css"
-import {Route} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import './GitHub.css'
 import GitHubUser from './GitHubUser'
 
-class GitHub extends Component {
-state={
+class Github extends Component {
+  state = {
     username: ''
-}
+  }
 
-handleChange = (ev) => {
+  handleChange = (ev) => {
     this.setState({
-        username: ev.target.value
+      username: ev.target.value
     })
-}
-handleSubmit = (ev) => {
+  }
+
+  handleSubmit = (ev) => {
     ev.preventDefault()
+    this.setState({username: ''})
     this.props.history.push(`/github/${this.state.username}`)
-}
+  }
 
-    render() {
-        return (
-            <div className='github'>
-            <img className="github-logo" src="http://www.aha.io/assets/github.7433692cabbfa132f34adb034e7909fa.png" 
-            alt="github logo"
+  render() {
+    return (
+      <div className="github">
+        <img 
+          className="github-logo" 
+          src="http://www.aha.io/assets/github.7433692cabbfa132f34adb034e7909fa.png" 
+          alt="github logo" 
+        />
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <input 
+              type="text"
+              value={this.state.username}
+              onChange={this.handleChange}
             />
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <input 
-                    type="text"
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                     />
-                </div>
-                <div>
-                    <button>Look Up GitHub UserName</button>
-                </div>
-            </form>
+          </div>
+          <div>
+            <button>Look up Github user</button>
+          </div>
+        </form>
 
-            <Route exact path="/GitHub" render={() => <h3> Plesase enter a username to search on github </h3>} />
-            <Route path="/GitHub/:username" component={GitHubUser} />
-            </div>
-
-        )
-    }
+        <Route exact path="/github" render={() => <h3>Please enter a username to search on Github</h3>} />
+        <Route path='/github/:username' component={GitHubUser} />
+      </div>
+    )
+  }
 }
 
-export default GitHub
+export default Github

@@ -1,31 +1,32 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+
 import './GitHubUser.css'
 
 class GitHubUser extends Component {
-constructor(props) {
+  constructor(props) {
     super(props)
 
-    this.fetchUserData()
     this.state = {
-        user: {}
+      user: {}
     }
-}
-fetchUserData(props) {
+
+    this.fetchUserData(props)  
+  }
+
+  fetchUserData(props) {
     fetch(`https://api.github.com/users/${props.match.params.username}`)
-    .then(data => data.json())
-    .then(user => this.setState({user}))
+      .then(data => data.json())
+      .then(user => this.setState({ user }))
+  }
 
-}
-
-
-componentWillRecieveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const locationChanged = nextProps.location !== this.props.location
-    if(locationChanged){
-        this.fetchUserData(nextProps)
+    if (locationChanged) {
+      this.fetchUserData(nextProps)
     }
-}
+  }
 
-   render() {
+  render() {
     const { user } = this.state
     return (
       <div className="github-user">
