@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import './GitHubUser.css'
+import './GithubUser.css'
 
-class GitHubUser extends Component {
+class GithubUser extends Component {
   constructor(props) {
     super(props)
 
@@ -40,4 +40,4 @@ class GitHubUser extends Component {
     )
   }
 }
-export default GitHubUser
+export default GithubUser
